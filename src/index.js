@@ -22,10 +22,25 @@ function renderOneToy(toy) {
     <h2>${toy.name}</h2>
     <img src="${toy.image}" class="toy-avatar" />
     <p>${toy.likes}</p>
-    <button class="like-btn" id="[toy_id]">Like ❤️</button>`
+    <button class="like-btn" id="${toy.id}">Like ❤️</button>`
     // toy card to DOM
     toyCollection.appendChild(card)
+  const button = document.getElementById(`${toy.id}`)
+  button.addEventListener("click", () => {
+    toy.likes += 1
+    card.querySelector("p").textContent = toy.likes
+  // tie what im doing to one toy back to event listener
+    })
 }
+// for one toy
+// so i want to target likes
+  // each click +1
+  // toy.likes =
+  // target the p text is toy.likes
+// newToyObject = {
+  // name: toyValue,
+  // image: imageValue,
+  // likes: 0,}
 
 
 const toyURL = "http://localhost:3000/toys"
@@ -39,9 +54,6 @@ function getAllToys() {
  
 // toyDate [ { id: value, name:  ,image: , likes: } ]  and array of objects
 
-  // add NEW TOY
-  // handle toy submit
-  // get form
 const form = document.querySelector("form.add-toy-form")
 
 form.addEventListener("submit", handlesSubmit)
@@ -56,19 +68,10 @@ function handlesSubmit(event) {
     image: imageValue,
     likes: 0,
 };
-
-  renderOneToy(newToyObject)
-  getNewToy(newToyObject)
+  addNewToy(newToyObject)
 }
 
-//   renderOneToy(toyData)
-//   getNewToy(toyData)
-  // console.log(toyInput)
-
-
-  //   post request 
-  // const to pass as second arg to POST fetch
-function getNewToy(newToyObject) {
+function addNewToy(newToyObject) {
 
   const configArray = {
     method: "POST",
@@ -81,8 +84,13 @@ function getNewToy(newToyObject) {
   }
   fetch(toyURL, configArray)
     .then((response)=> response.json())
-    .then((toyData) => console.log(toyData))
+    .then((toyData) => renderOneToy(newToyObject))
 }
+
+//add event listener to like button
+// get button
+// add eventlistner to button
+//
 
 
 
