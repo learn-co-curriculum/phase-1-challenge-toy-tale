@@ -58,6 +58,7 @@ function handlesSubmit(event) {
 };
 
   renderOneToy(newToyObject)
+  getNewToy(newToyObject)
 }
 
 //   renderOneToy(toyData)
@@ -65,28 +66,23 @@ function handlesSubmit(event) {
   // console.log(toyInput)
 
 
-
-    // post request 
+  //   post request 
   // const to pass as second arg to POST fetch
-// function getNewToy(toyData) {
+function getNewToy(newToyObject) {
 
-//   const configArray = {
-//     method: "POST",
-//     headers: 
-//     {
-//       "Content-Type": "application/json",
-//       "Accept": "application/json"
-//     },
-//     body: JSON.stringify({
-//       name: toyData.name,
-//       image: toyData.image,
-//       like: toyData.likes,
-//     })
-//   }
-//   fetch(toyURL, configArray)
-//     .then((response)=> response.json())
-//     .then((toyData) => console.log(toyData))
-// }
+  const configArray = {
+    method: "POST",
+    headers: 
+    {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(newToyObject)
+  }
+  fetch(toyURL, configArray)
+    .then((response)=> response.json())
+    .then((toyData) => console.log(toyData))
+}
 
 
 
