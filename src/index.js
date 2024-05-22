@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 });
+/////////////////////////////////////////////////////////////////////////////
+const toyURL = "http://localhost:3000/toys"
+const toyCollection = document.getElementById("toy-collection") 
 
 function renderOneToy(toy) {
   //build card
@@ -21,38 +24,34 @@ function renderOneToy(toy) {
   card.innerHTML = `
     <h2>${toy.name}</h2>
     <img src="${toy.image}" class="toy-avatar" />
-    <p>${toy.likes}</p>
+    <p>${toy.likes} likes</p>
     <button class="like-btn" id="${toy.id}">Like ❤️</button>`
-    // toy card to DOM
     toyCollection.appendChild(card)
   const button = document.getElementById(`${toy.id}`)
   button.addEventListener("click", () => {
-    toy.likes += 1
-    card.querySelector("p").textContent = toy.likes
-  // tie what im doing to one toy back to event listener
+    toy.likes++
+    card.querySelector("p").textContent = `${toy.likes} likes` 
+
+    fetch(`http://localhost:3000/toys/${toy.id}`, {
+      method: "PATCH",
+      header: 
+      {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        "likes" : `${toy.likes}`
+      })
     })
+  })
 }
-// for one toy
-// so i want to target likes
-  // each click +1
-  // toy.likes =
-  // target the p text is toy.likes
-// newToyObject = {
-  // name: toyValue,
-  // image: imageValue,
-  // likes: 0,}
 
-
-const toyURL = "http://localhost:3000/toys"
-const toyCollection = document.getElementById("toy-collection") 
 
 function getAllToys() {
   fetch(toyURL)
   .then((response) => response.json())
   .then((toyData) => toyData.forEach(toy => renderOneToy(toy)))
 }
- 
-// toyDate [ { id: value, name:  ,image: , likes: } ]  and array of objects
 
 const form = document.querySelector("form.add-toy-form")
 
@@ -67,7 +66,7 @@ function handlesSubmit(event) {
     name: toyValue,
     image: imageValue,
     likes: 0,
-};
+  };
   addNewToy(newToyObject)
 }
 
@@ -86,13 +85,6 @@ function addNewToy(newToyObject) {
     .then((response)=> response.json())
     .then((toyData) => renderOneToy(newToyObject))
 }
-
-//add event listener to like button
-// get button
-// add eventlistner to button
-//
-
-
 
 function initialize() {
   getAllToys()
