@@ -80,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
-
   addBtn.addEventListener("click", () => {
     // hide & seek with the form
     addToy = !addToy;
@@ -89,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       toyFormContainer.style.display = "none";
     }
-  });
+  })
 
   displayAllToys()
   addNewToy()
