@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       div.appendChild(p)
       div.appendChild(btn)
 
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
         let newNumberOfLikes = toy.likes += 1
         fetch(`http://localhost:3000/toys/${toy.id}`, {
           method: 'PATCH',
@@ -48,14 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
             "likes": newNumberOfLikes
           })
         })
-        .then(displayAllToys)
+        .then(p.innerText = `${toy.likes} likes`)
       })
     })
   }
 
   function addNewToy() {
     let form = document.querySelector('form.add-toy-form')
-    console.log(form)
 
     form.addEventListener('submit', (e) => {
       e.preventDefault()
