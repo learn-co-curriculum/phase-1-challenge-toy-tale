@@ -13,3 +13,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+
+const fetchToys = () => {
+
+}
+
+const createToy = (toy) => {
+
+}
+
+const submitForm = (submit) => {
+    submit.preventDefault()
+    let toy = {
+      name: submit.target.name.value,
+      image: submit.target.image.value,
+      likes: 0
+    }
+    addWithObj(toy)
+}
+
+//if bool == true, then we edit the likes, if not, we edit everything
+const addWithObj = (toyObj) => {
+  fetch("http://localhost:3000/toys",{
+        method:"POST",
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({toys:toyObj})
+  })
+
+  .then(r => r.json())
+  .then(data => {
+    console.log("added the data to the thing")
+    createToy(toy)
+  })
+}
