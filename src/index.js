@@ -14,4 +14,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-//Justin's branch
+function fetchToys(toys){
+  const toyCollection = document.querySelector(".toy-collection")
+  const header = document.createElement("h2")
+  const image = document.createElement("img")
+  const likes = document.createElement("p")
+  const button = document.createElement("button")
+  
+  header.textContent = toys.name
+  image.src = toys.image
+  likes.textContent = toys.likes
+  button.textContent = "Like <3"
+
+  toyCollection.appendChild(header, image, likes, button)
+}
+
